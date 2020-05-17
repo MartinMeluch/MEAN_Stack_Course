@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { FocusTrapManager } from '@angular/cdk/a11y/focus-trap/focus-trap-manager';
+import { PostsService } from '../posts.service';
 
 @Component({
   selector: 'app-post-create',
@@ -6,11 +9,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./post-create.component.css']
 })
 export class PostCreateComponent {
-  newPost = 'No Content';
-  enteredValue = '';
+  enteredTitle = '';
+  enteredContent = '';
 
-  onAddPost(postInput: HTMLTextAreaElement) {
-    this.newPost = this.enteredValue;
+  constructor(
+    public postsService: PostsService
+  ) {}
+
+  onAddPost(form: NgForm) {
+    if (form.invalid) {
+      return;
+    }
+    this.postsService.addPost(form.value.title, form.value.content);
+    form.resetForm();
   }
 
 }
