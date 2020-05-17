@@ -1,4 +1,7 @@
-<textarea [(ngModel)]="enteredValue" rows="6" #postInput></textarea>
-<hr>
-<button (click)="onAddPost(postInput)">Save Post</button>
+<mat-card>
+  <mat-form-field>
+    <textarea matInput [(ngModel)]="enteredValue" rows="6" #postInput></textarea>
+  </mat-form-field>
+  <button mat-raised-button color='accent' (click)="onAddPost(postInput)">Save Post</button>
+</mat-card>
 <p>{{ newPost }}</p>
